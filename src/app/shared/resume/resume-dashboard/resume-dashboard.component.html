@@ -1,0 +1,10 @@
+<button class="r-btn" (click)="openFormDialog()" mat-button mat-raised-button color="accent">Create Resume</button>
+
+<div class="row mt-5">
+    <div class="col-md-3">
+        <app-resumes [resumesArray]="resumesArray"></app-resumes>
+    </div>
+    <div class="col-md-9">
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<mat-card *ngIf="resObj">
+    <mat-card-header class="c-header mb-3">
+        <h1 class="fname my-3">{{resObj.fullName}}</h1>
+    </mat-card-header>
+    <mat-card-content class="mx-5">
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <address class="mb-0">
+
+                    <p><mat-icon>location_on</mat-icon>{{resObj.address}}</p>
+                </address>
+                <p>
+                    <mat-icon> call</mat-icon>{{resObj.phone}}
+                </p>
+                <p>
+                    <mat-icon>alternate_email</mat-icon> {{resObj.email}}
+                </p>
+            </div>
+            <div class="col-md-6">
+                <h2><mat-icon>offline_bolt</mat-icon>Objective</h2>
+                <p class="ml-2">
+                    {{resObj.objective}}
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2><mat-icon>star</mat-icon>Skills</h2>
+
+                <ul>
+                    <li *ngFor="let sk of resObj.skillsArray">
+                        {{sk.name}}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h2><mat-icon>school</mat-icon>Education</h2>
+
+                <div class="education d-flex">
+                    <ul>
+                        <li *ngFor="let edu of resObj.education">
+                            {{edu}}
+                        </li>
+                    </ul>
+                    <ul style="list-style: none;">
+                        <li *ngFor="let schUni of resObj.schoolUni">
+                            {{schUni}}
+                        </li>
+                    </ul>
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2><mat-icon>language</mat-icon>Languages</h2>
+                <ul>
+                    <li *ngIf="resObj.langEnglish">English</li>
+                    <li *ngIf="resObj.langHindi">Hindi</li>
+                    <li *ngIf="resObj.langMarathi">Marathi</li>
+                </ul>
+            </div>
+        </div>
+
+    </mat-card-content>
+</mat-card>
+
+{{resObj | json}}
