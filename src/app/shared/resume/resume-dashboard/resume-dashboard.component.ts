@@ -20,33 +20,6 @@ export class ResumeDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this._resumeSerivce.getAllResume()
-      .pipe(
-        map(res => {
-          let arr = []
-
-          for (let key in res) {
-            let obj: Iresume = {
-              address: res[key].address,
-              education: res[key].education,
-              email: res[key].email,
-              fullName: res[key].fullName,
-              langEnglish: res[key].langEnglish,
-              langHindi: res[key].langHindi,
-              langMarathi: res[key].langMarathi,
-              objective: res[key].objective,
-              phone: res[key].phone,
-              schoolUni: res[key].schoolUni,
-              skillsArray: res[key].skillsArray,
-              id: key
-            }
-
-            console.log(obj);
-            arr.push(obj)
-          }
-
-          return arr
-        })
-      )
       .subscribe(res => {
         console.log(res);
         this.resumesArray = res
@@ -60,7 +33,15 @@ export class ResumeDashboardComponent implements OnInit {
     this.dialog.open(ResumeFormComponent, dialogConfig).afterClosed()
       .subscribe(res => {
         console.log('result', res);
-
+        if (res) {
+          setTimeout(() => {
+            this._resumeSerivce.getAllResume()
+              .subscribe(res => {
+                console.log(res);
+                this.resumesArray = res
+              })
+          }, 500);
+        }
       })
   }
 }

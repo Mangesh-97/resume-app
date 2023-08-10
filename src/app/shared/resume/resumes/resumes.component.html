@@ -1,5 +1,5 @@
 <ul class="list-group">
-    <li class="list-group-item" *ngFor="let res of resumesArray" [routerLink]="[res.id]">
+    <li class="list-group-item" *ngFor="let res of resumesArray" [routerLink]="[res.id]" routerLinkActive="active">
         {{res.fullName}}
     </li>
 </ul>

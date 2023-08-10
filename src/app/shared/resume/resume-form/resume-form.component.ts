@@ -4,6 +4,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { skill } from '../../model/resume-form';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ResumeService } from '../../services/resume.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resume-form',
@@ -16,7 +17,8 @@ export class ResumeFormComponent implements OnInit {
   resumeForm!: FormGroup
   constructor(
     private _fb: FormBuilder,
-    private _resumeService: ResumeService
+    private _resumeService: ResumeService,
+    private _router: Router
   ) { }
 
   ngOnInit(): void {
@@ -82,8 +84,8 @@ export class ResumeFormComponent implements OnInit {
       // console.log(this.resumeForm.controls['skillsArray'].value);
       this._resumeService.addResume(this.resumeForm.value)
         .subscribe(res => {
-          console.log(res);
-
+          console.log(res.name, 'key here');
+          this._router.navigate([res.name])
         })
     }
   }

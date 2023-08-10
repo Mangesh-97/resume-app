@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Iresume } from '../model/resume-form';
 
@@ -19,6 +19,33 @@ export class ResumeService {
 
   getAllResume(): Observable<Iresume[]> {
     return this._http.get<Iresume[]>(`${environment.firbaseDB}resume.json`)
+      .pipe(
+        map(res => {
+          let arr = []
+
+          for (let key in res) {
+            let obj: Iresume = {
+              address: res[key].address,
+              education: res[key].education,
+              email: res[key].email,
+              fullName: res[key].fullName,
+              langEnglish: res[key].langEnglish,
+              langHindi: res[key].langHindi,
+              langMarathi: res[key].langMarathi,
+              objective: res[key].objective,
+              phone: res[key].phone,
+              schoolUni: res[key].schoolUni,
+              skillsArray: res[key].skillsArray,
+              id: key
+            }
+
+            console.log(obj);
+            arr.push(obj)
+          }
+
+          return arr
+        })
+      )
   }
 
   getResume(id: string): Observable<Iresume> {
