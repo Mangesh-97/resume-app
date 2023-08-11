@@ -13,7 +13,7 @@ export interface Iresume {
     langMarathi: boolean
     objective: string
     phone: string
-    schoolUni: string[]
+    board: string[]
     skillsArray: ISkillsArray[],
     id?: string
 }

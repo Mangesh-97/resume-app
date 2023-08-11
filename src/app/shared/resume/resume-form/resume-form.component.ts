@@ -5,6 +5,7 @@ import { skill } from '../../model/resume-form';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ResumeService } from '../../services/resume.service';
 import { Router } from '@angular/router';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-resume-form',
@@ -18,7 +19,8 @@ export class ResumeFormComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _resumeService: ResumeService,
-    private _router: Router
+    private _router: Router,
+    private _dialogRef: MatDialogRef<ResumeFormComponent>
   ) { }
 
   ngOnInit(): void {
@@ -35,7 +37,7 @@ export class ResumeFormComponent implements OnInit {
       phone: [null, Validators.required],
       address: [null, Validators.required],
       education: this._fb.array(['']),
-      schoolUni: this._fb.array(['']),
+      board: this._fb.array(['']),
       skillsArray: this._fb.array([]),
       langEnglish: [null],
       langHindi: [null],
@@ -78,13 +80,14 @@ export class ResumeFormComponent implements OnInit {
   onResumeFormSubmit() {
 
     if (this.resumeForm.valid && this.skills.length > 0) {
-      console.log(this.resumeForm.value);
+      // console.log(this.resumeForm.value);
 
       this.f['skillsArray'].value.push(...this.skills)
       // console.log(this.resumeForm.controls['skillsArray'].value);
       this._resumeService.addResume(this.resumeForm.value)
         .subscribe(res => {
-          console.log(res.name, 'key here');
+          // console.log(res.name, 'key here');
+          // this._dialogRef.close()
           this._router.navigate([res.name])
         })
     }
@@ -99,21 +102,21 @@ export class ResumeFormComponent implements OnInit {
     return this.resumeForm.get('education') as FormArray
   }
 
-  get schoolUniFormsArray() {
-    return this.resumeForm.get('schoolUni') as FormArray
+  get boardFormsArray() {
+    return this.resumeForm.get('board') as FormArray
   }
 
   addEduction() {
-    if ((this.EducationFormsArray && this.schoolUniFormsArray).length < 4) {
+    if ((this.EducationFormsArray && this.boardFormsArray).length < 4) {
 
       this.EducationFormsArray.push(new FormControl(null))
-      this.schoolUniFormsArray.push(new FormControl(null))
+      this.boardFormsArray.push(new FormControl(null))
     }
   }
 
   onRemoveEdu(id: number) {
     this.EducationFormsArray.removeAt(id)
-    this.schoolUniFormsArray.removeAt(id)
+    this.boardFormsArray.removeAt(id)
   }
 }
 

@@ -21,10 +21,10 @@ export class ResumeComponent implements OnInit {
     this._route.params
       .subscribe(res => {
         this.resumeId = res['resId']
-        console.log(this.resumeId);
+        // console.log(this.resumeId);
         this._resumeService.getResume(this.resumeId)
           .subscribe(res => {
-            console.log(res);
+            // console.log(res);
             this.resObj = res
 
 

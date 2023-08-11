@@ -21,7 +21,7 @@ export class ResumeDashboardComponent implements OnInit {
   ngOnInit(): void {
     this._resumeSerivce.getAllResume()
       .subscribe(res => {
-        console.log(res);
+        // console.log(res);
         this.resumesArray = res
       })
   }
@@ -37,7 +37,7 @@ export class ResumeDashboardComponent implements OnInit {
           setTimeout(() => {
             this._resumeSerivce.getAllResume()
               .subscribe(res => {
-                console.log(res);
+                // console.log(res);
                 this.resumesArray = res
               })
           }, 500);

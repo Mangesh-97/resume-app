@@ -34,12 +34,12 @@ export class ResumeService {
               langMarathi: res[key].langMarathi,
               objective: res[key].objective,
               phone: res[key].phone,
-              schoolUni: res[key].schoolUni,
+              board: res[key].board,
               skillsArray: res[key].skillsArray,
               id: key
             }
 
-            console.log(obj);
+            // console.log(obj);
             arr.push(obj)
           }
 
