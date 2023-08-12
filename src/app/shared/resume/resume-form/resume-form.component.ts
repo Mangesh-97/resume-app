@@ -9,6 +9,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { ResumeComponent } from '../resume/resume.component';
 import { SnackbarService } from '../../services/snackbar.service';
 import { DeleteConfirmationComponent } from '../../material/delete-confirmation/delete-confirmation.component';
+import { CustomRegex } from '../../const/validators_regexp';
 
 @Component({
   selector: 'app-resume-form',
@@ -98,8 +99,8 @@ export class ResumeFormComponent implements OnInit {
   createResumeForm(): FormGroup {
     return this.resumeForm = this._fb.group({
       fullName: [null, Validators.required],
-      email: [null, Validators.required], 
-      phone: [null, Validators.required],
+      email: [null, [Validators.required, Validators.pattern(CustomRegex.email)]], 
+      phone: [null, [Validators.required, Validators.pattern(CustomRegex.phone)]],
       address: [null, Validators.required],
       education: this._fb.array([null]),
       board: this._fb.array([null]),
@@ -136,6 +137,8 @@ export class ResumeFormComponent implements OnInit {
     if (index >= 0) {
       (this.resumeForm.controls['skillsArray'].value as Array<skill>).splice(index, 1)
       this.skills.splice(index, 1);
+      // console.log(this.skills, 'localArray');
+      // console.log(this.SkillsFormsArray.value, 'formarry');
     }
   }
 
