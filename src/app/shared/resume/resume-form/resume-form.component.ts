@@ -20,6 +20,7 @@ export class ResumeFormComponent implements OnInit {
 
   resumeForm!: FormGroup
   skills: skill[] = [];
+  employmentArray: Array<string> = ['Fresher', 'Experinced']
 
   constructor(
     private _fb: FormBuilder,
@@ -48,11 +49,8 @@ export class ResumeFormComponent implements OnInit {
         this.skills.push(this.resObj.skillsArray[i])
         // this.SkillsFormsArray.push(new FormControl({ name: this.resObj.skillsArray[i].name }))
         this.SkillsFormsArray.push(new FormControl(this.resObj.skillsArray[i]))
-
         // console.log(this.skills, 'afterpushed', this.resumeForm.controls['skillsArray'].value);
-
       }
-
       // console.log(this.resObj.education)
       // console.log(this.resObj.board)
       for (let i = 1; i < this.resObj.education.length; i++) {
@@ -63,9 +61,36 @@ export class ResumeFormComponent implements OnInit {
         this.boardFormsArray.push(new FormControl(this.resObj.board[i]))
 
       }
+      if (this.resObj.employment.includes('Experinced')) {
+        this.resumeForm.addControl('companyName',new FormControl(this.resObj.companyName, Validators.required))
+        this.resumeForm.addControl('experience',new FormControl(this.resObj.experience, Validators.required))
+        this.resumeForm.addControl('designation',new FormControl(this.resObj.designation, Validators.required))
+      }else{
+        this.resumeForm.removeControl('companyName')
+        this.resumeForm.removeControl('experience')
+        this.resumeForm.removeControl('designation')
+      }
 
     }
 
+    this.f['employment'].valueChanges
+    .subscribe(res => {
+      // console.log(res);
+      if (res.includes('Experinced')) {
+        
+        this.resumeForm.addControl('companyName',new FormControl(null, Validators.required))
+        this.resumeForm.addControl('experience',new FormControl(null, Validators.required))
+        this.resumeForm.addControl('designation',new FormControl(null, Validators.required))
+      }else{
+        this.resumeForm.removeControl('companyName')
+        this.resumeForm.removeControl('experience')
+        this.resumeForm.removeControl('designation')
+
+
+      }
+      console.log(this.resumeForm.value);
+      
+    })
 
 
   }
@@ -73,11 +98,12 @@ export class ResumeFormComponent implements OnInit {
   createResumeForm(): FormGroup {
     return this.resumeForm = this._fb.group({
       fullName: [null, Validators.required],
-      email: [null, Validators.required],
+      email: [null, Validators.required], 
       phone: [null, Validators.required],
       address: [null, Validators.required],
       education: this._fb.array([null]),
       board: this._fb.array([null]),
+      employment:[null, Validators.required], //
       skillsArray: this._fb.array([]),
       langEnglish: [null],
       langHindi: [null],
@@ -116,7 +142,7 @@ export class ResumeFormComponent implements OnInit {
   onResumeFormSubmit() {
 
     if (this.resumeForm.valid) {
-      // console.log(this.resumeForm.value);
+      console.log(this.resumeForm.value);
       // console.log(this.resumeForm.controls['skillsArray'].value);
 
       // this.f['skillsArray'].value.push(...this.skills) // no need
@@ -188,6 +214,7 @@ export class ResumeFormComponent implements OnInit {
             this._resumeService.deleteResume(this.resObj.id!) 
               .subscribe(res => {
                 // console.log(res);
+                this._snackbarService.openSnackBar('Delete Successfully.....!!!')
                 this._router.navigate([''])
               })
           }

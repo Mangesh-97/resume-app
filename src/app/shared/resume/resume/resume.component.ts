@@ -15,6 +15,7 @@ export class ResumeComponent implements OnInit {
   resumeId!: string
 
   resObj!: Iresume
+
   constructor(
     private _route: ActivatedRoute,
     private _resumeService: ResumeService,
@@ -47,6 +48,8 @@ export class ResumeComponent implements OnInit {
       const dialogConfig = new MatDialogConfig
 
       dialogConfig.data = this.resObj
+      dialogConfig.autoFocus = true
+      dialogConfig.disableClose = true
       this._dialog.open(ResumeFormComponent, dialogConfig).afterClosed()
         .subscribe(res => {
           // console.log(res);

@@ -7,7 +7,7 @@
         </button>
     </mat-card-header>
     <mat-card-content class="mx-5">
-        <div class="row mb-2">
+        <div class="row mb-3">
             <div class="col-md-6">
                 <address class="mb-0">
 
@@ -22,14 +22,14 @@
             </div>
             <div class="col-md-6">
                 <h2><mat-icon>offline_bolt</mat-icon>Objective</h2>
-                <p class="ml-2">
+                <p class="ml-4">
                     {{resObj.objective}}
                 </p>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-6" *ngIf="resObj.skillsArray">
+        <div class="row mb-2">
+            <div class="col-md-6">
                 <h2><mat-icon>star</mat-icon>Skills</h2>
 
                 <ul>
@@ -59,7 +59,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mb-2">
             <div class="col-md-6" *ngIf="resObj.langEnglish || resObj.langHindi || resObj.langMarathi">
                 <h2><mat-icon>language</mat-icon>Languages</h2>
                 <ul>
@@ -67,6 +67,16 @@
                     <li *ngIf="resObj.langHindi">Hindi</li>
                     <li *ngIf="resObj.langMarathi">Marathi</li>
                 </ul>
+
+               
+            </div>
+            <div class="col-md-6" *ngIf="resObj.employment.includes('Experinced')">
+                <h2><mat-icon>work</mat-icon>Experince</h2>
+                <h3 class="ml-4 mb-0">{{resObj.companyName}}</h3>
+                
+                <p class="ml-4">{{resObj.designation}}</p>
+                <p class="ml-4">({{resObj.experience}})</p>
+                
             </div>
         </div>
 

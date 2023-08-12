@@ -104,6 +104,69 @@
 
             </div>
         </div>
+
+        <div class="row mb-3">
+            <div class="col-12">
+                <!-- <label id="example-radio-group-label"></label><br> -->
+                <h4>Employment:</h4>
+
+                <mat-radio-group  color="primary" formControlName="employment">
+                <mat-radio-button [value]="emp" *ngFor="let emp of employmentArray" >{{emp}}</mat-radio-button>
+             
+              </mat-radio-group>
+            </div>
+        </div>
+        <div class="row" *ngIf="f['companyName']">
+            <div class="col-md-8">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Current Company Name</mat-label>
+                    <input matInput placeholder="Enter Your Current Company Name" formControlName="companyName" required
+                        cdkFocusInitial>
+                    <mat-icon matSuffix [ngClass]="{'text-danger': f['companyName'].invalid}">{{!f['companyName'].invalid ?
+                        'sentiment_very_satisfied' :
+                        'sentiment_very_dissatisfied'}}</mat-icon>
+                    <mat-error> 
+                        this field is mandatory
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+            <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Total Experience</mat-label>
+                    <mat-select  required formControlName="experience">
+                        <mat-option value="3 Month">3 Month</mat-option>
+                        <mat-option value="6 Month">6 Month</mat-option>
+                        <mat-option value="1 Year">1 Year</mat-option>
+                        <mat-option value="2 Year">2 Year</mat-option>
+                        <mat-option value="3+ Year">3+ Year</mat-option>
+                    </mat-select>
+                    <mat-error>
+                        this field is mandatory
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="f['designation']">
+            <div class="col-md-12">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Current designation</mat-label>
+                    <input matInput placeholder="Enter Your Current designation" formControlName="companyName" required
+                    formControlName="designation"
+                        cdkFocusInitial>
+                    <mat-icon matSuffix [ngClass]="{'text-danger': f['designation'].invalid}">{{!f['designation'].invalid ?
+                        'sentiment_very_satisfied' :
+                        'sentiment_very_dissatisfied'}}</mat-icon>
+                    <mat-error> 
+                        this field is mandatory
+                    </mat-error>
+                </mat-form-field>
+            </div>
+      
+        </div>
+
+
         <div class="row">
             <div class="col-12">
                 <mat-form-field class="w-100" appearance="outline">
@@ -122,6 +185,9 @@
                 </mat-form-field>
             </div>
         </div>
+
+     
+
 
         <div class="row mb-3">
             <div class="col-12">
@@ -166,6 +232,7 @@
                 [mat-dialog-close]="true">
                 Create
             </button>
+
     
             <button mat-button mat-raised-button color="accent" 
             *ngIf="resObj"

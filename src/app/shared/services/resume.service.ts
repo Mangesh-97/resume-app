@@ -38,6 +38,10 @@ export class ResumeService {
               phone: res[key].phone,
               board: res[key].board,
               skillsArray: res[key].skillsArray,
+              employment: res[key].employment,
+              companyName: res[key].companyName,
+              experience: res[key].experience,
+              designation: res[key].designation,
               id: key
             }
 

@@ -15,7 +15,11 @@ export interface Iresume {
     phone: string
     board: string[]
     skillsArray: ISkillsArray[],
-    id?: string
+    id?: string,
+    employment: string
+    companyName?: string
+    experience?: 'Experinced' | 'Fresher',
+    designation?: string
 }
 
 export interface ISkillsArray {

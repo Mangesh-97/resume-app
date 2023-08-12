@@ -19,6 +19,8 @@ export class ResumeDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    
     this._resumeSerivce.getAllResume()
       .subscribe(res => {
         // console.log(res);
