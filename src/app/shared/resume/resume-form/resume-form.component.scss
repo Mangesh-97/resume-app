@@ -13,8 +13,22 @@ mat-checkbox {
 
 .bg-yellow{
     color: #ffd740;
+    text-shadow: 1px 1px 0.5px #000;
 }
 
 .mat-radio-button ~ .mat-radio-button {
     margin-left: 16px;
-  }
+}
+
+::ng-deep .mat-dialog-container {
+    box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),0px 24px 38px 3px rgba(0, 0, 0, 0.14),0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+    // background: #000 !important;
+    background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
+    color: rgba(0,0,0,.87);
+}
+
+
+.mat-chip.mat-standard-chip {
+    background-color: #ffecd2;
+    color: rgba(0,0,0,.87);
+}
