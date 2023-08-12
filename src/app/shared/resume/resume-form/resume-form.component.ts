@@ -88,7 +88,7 @@ export class ResumeFormComponent implements OnInit {
 
 
       }
-      console.log(this.resumeForm.value);
+      // console.log(this.resumeForm.value);
       
     })
 
@@ -142,7 +142,7 @@ export class ResumeFormComponent implements OnInit {
   onResumeFormSubmit() {
 
     if (this.resumeForm.valid) {
-      console.log(this.resumeForm.value);
+      // console.log(this.resumeForm.value);
       // console.log(this.resumeForm.controls['skillsArray'].value);
 
       // this.f['skillsArray'].value.push(...this.skills) // no need
