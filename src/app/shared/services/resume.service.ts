@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Iresume } from '../model/resume-form';
 
@@ -8,6 +8,8 @@ import { Iresume } from '../model/resume-form';
   providedIn: 'root'
 })
 export class ResumeService {
+
+  deleteResume$= new BehaviorSubject<boolean>(false)
 
   constructor(
     private _http: HttpClient
@@ -20,7 +22,7 @@ export class ResumeService {
   getAllResume(): Observable<Iresume[]> {
     return this._http.get<Iresume[]>(`${environment.firbaseDB}resume.json`)
       .pipe(
-        map(res => {
+        map((res: Iresume[]) => {
           let arr = []
 
           for (let key in res) {
@@ -50,5 +52,24 @@ export class ResumeService {
 
   getResume(id: string): Observable<Iresume> {
     return this._http.get<Iresume>(`${environment.firbaseDB}resume/${id}/.json`)
+      .pipe(
+        map((res: Iresume) => {
+          // console.log(res);
+          let obj = {
+            ...res,
+            id: id
+          }
+          return obj
+        })
+      )
+  }
+
+  updateResume(id: string, obj: Iresume): Observable<Iresume> {
+    return this._http.patch<Iresume>(`${environment.firbaseDB}resume/${id}/.json`, obj)
+
+  }
+
+  deleteResume(id: string): Observable<any> {
+    return this._http.delete<Iresume>(`${environment.firbaseDB}resume/${id}/.json`)
   }
 }

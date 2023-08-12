@@ -1,6 +1,10 @@
 <mat-card *ngIf="resObj">
-    <mat-card-header class="c-header mb-3">
+    <mat-card-header class="c-header mb-3 d-flex align-items-center">
         <h1 class="fname my-3">{{resObj.fullName}}</h1>
+        <button mat-mini-fab color="accent" aria-label="Example icon button with a delete icon" class="ml-auto mr-2"
+            (click)="onEdit()">
+            <mat-icon>edit</mat-icon>
+        </button>
     </mat-card-header>
     <mat-card-content class="mx-5">
         <div class="row mb-2">
@@ -25,7 +29,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="resObj.skillsArray">
                 <h2><mat-icon>star</mat-icon>Skills</h2>
 
                 <ul>
@@ -56,7 +60,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="resObj.langEnglish || resObj.langHindi || resObj.langMarathi">
                 <h2><mat-icon>language</mat-icon>Languages</h2>
                 <ul>
                     <li *ngIf="resObj.langEnglish">English</li>
