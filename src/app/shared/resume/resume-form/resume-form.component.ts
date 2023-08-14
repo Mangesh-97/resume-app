@@ -152,14 +152,14 @@ export class ResumeFormComponent implements OnInit {
       // console.log(this.resumeForm.controls['skillsArray'].value);
 
 
-      // this._resumeService.addResume(this.resumeForm.value)
-      //   .subscribe(res => {
-      //     // console.log(res.name, 'key here');
-      //     this._snackbarService.openSnackBar(`${this.resumeForm.controls['fullName'].value}'s resume Created Successfully`)
-      //     this._dialogRef.close()
-      //     this._router.navigate([res.name])
+      this._resumeService.addResume(this.resumeForm.value)
+        .subscribe(res => {
+          // console.log(res.name, 'key here');
+          this._snackbarService.openSnackBar(`${this.resumeForm.controls['fullName'].value}'s resume Created Successfully`)
+          this._dialogRef.close()
+          this._router.navigate([res.name])
 
-      //   })
+        })
 
 
     }
