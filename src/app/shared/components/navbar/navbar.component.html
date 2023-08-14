@@ -1,0 +1,60 @@
+
+    <mat-toolbar class="bg-s text-white">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="sidenav.toggle()" >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Resume Dashboard</span>
+<!--     
+    <div class="ml-auto">
+        <a routerLink="/" mat-button routerLinkActive="ac">
+            Resume
+          </a>
+    </div> -->
+    </mat-toolbar>
+
+    <mat-drawer-container class="example-container" >
+        <mat-drawer mode="side" #sidenav >
+
+            <mat-nav-list>
+                <a routerLink="/" mat-list-item (click)="sidenav.toggle()" >
+                    <mat-icon>
+                        house
+                    </mat-icon>
+                    <span class="ml-2">
+                        Home
+                    </span>
+                </a>
+                <a  mat-list-item (click)="sidenav.toggle()" >
+             
+                    <mat-icon>
+                        person
+                    </mat-icon>
+                    
+                    <span class="ml-2">
+                        profile
+                    </span>
+                </a>
+                <a mat-list-item (click)="sidenav.toggle()">
+                    <mat-icon>
+                        forum
+                    </mat-icon>
+                    
+                    <span class="ml-2">
+                        about
+                    </span>
+                </a>
+            </mat-nav-list>
+        </mat-drawer>
+        <mat-drawer-content (click)="sidenav.close()">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ng-content></ng-content>
+<app-main-dashboard></app-main-dashboard>
+
+                    </div>
+                </div>
+            </div>
+        </mat-drawer-content>
+      </mat-drawer-container>
+  

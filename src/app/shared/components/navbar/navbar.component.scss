@@ -1,0 +1,51 @@
+a{
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    background:rgba(0,0,0,.4);
+}
+.ac {
+    background:rgba(0,0,0,.4);
+}
+
+::ng-deep .bg-s{
+    // background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
+    // background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+    // background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
+    // background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
+    background-color: #0e1420;
+    // background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
+    // text-decoration: underline;
+}
+
+mat-drawer{
+    width: 14%;
+    // background-color: #85f6b8;
+    background-color: #111926;
+
+}
+
+
+mat-drawer-container{
+    height: calc(100vh - 65px);
+    background-color: #ededed;
+
+}
+
+mat-nav-list > a {
+    color: #c4cbd5;
+}
+
+mat-nav-list > a:hover,mat-nav-list > a:active,mat-nav-list > a:focus {
+    color: #fff;
+    background-color: #222836;
+}
+
+@media screen and (max-width: 600px) {
+    
+mat-drawer{
+    width: 150px;
+}
+}
