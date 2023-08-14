@@ -20,6 +20,7 @@ export interface Iresume {
     companyName?: string
     experience?: 'Experinced' | 'Fresher',
     designation?: string
+    hobby?: Array<string>
 }
 
 export interface ISkillsArray {

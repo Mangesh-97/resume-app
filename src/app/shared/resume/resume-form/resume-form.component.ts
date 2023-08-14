@@ -110,7 +110,7 @@ export class ResumeFormComponent implements OnInit {
       langHindi: [null],
       langMarathi: [null],
       objective: [null, Validators.required],
-
+      hobby: this._fb.array([this._fb.control(null, Validators.required)])
     })
 
   }
@@ -145,19 +145,23 @@ export class ResumeFormComponent implements OnInit {
   onResumeFormSubmit() {
 
     if (this.resumeForm.valid) {
-      // console.log(this.resumeForm.value);
+      console.log(this.resumeForm.value);
       // console.log(this.resumeForm.controls['skillsArray'].value);
 
       // this.f['skillsArray'].value.push(...this.skills) // no need
       // console.log(this.resumeForm.controls['skillsArray'].value);
-      this._resumeService.addResume(this.resumeForm.value)
-        .subscribe(res => {
-          // console.log(res.name, 'key here');
-          this._snackbarService.openSnackBar(`${this.resumeForm.controls['fullName'].value}'s resume Created Successfully`)
-          this._dialogRef.close()
-          this._router.navigate([res.name])
 
-        })
+
+      // this._resumeService.addResume(this.resumeForm.value)
+      //   .subscribe(res => {
+      //     // console.log(res.name, 'key here');
+      //     this._snackbarService.openSnackBar(`${this.resumeForm.controls['fullName'].value}'s resume Created Successfully`)
+      //     this._dialogRef.close()
+      //     this._router.navigate([res.name])
+
+      //   })
+
+
     }
   }
 
@@ -194,6 +198,11 @@ export class ResumeFormComponent implements OnInit {
     return this.resumeForm.get('skillsArray') as FormArray
 
   }
+  
+  get hobbyFormsArray() {
+    return this.resumeForm.get('hobby') as FormArray
+
+  }
   addEduction() {
     if ((this.EducationFormsArray && this.boardFormsArray).length < 4) {
 
@@ -205,6 +214,16 @@ export class ResumeFormComponent implements OnInit {
   onRemoveEdu(id: number) {
     this.EducationFormsArray.removeAt(id)
     this.boardFormsArray.removeAt(id)
+  }
+
+  addHobby() {
+    if (this.hobbyFormsArray.length < 3) {
+      this.hobbyFormsArray.push(new FormControl(null, [Validators.required]))
+    }
+  }
+
+  onRemoveHobby(id: number) {
+    this.hobbyFormsArray.removeAt(id)
   }
 
 
