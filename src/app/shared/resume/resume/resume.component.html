@@ -33,7 +33,7 @@
                 <h2><mat-icon>star</mat-icon>Skills</h2>
 
                 <ul>
-                    <li *ngFor="let sk of resObj.skillsArray">
+                    <li *ngFor="let sk of resObj.skillsArray" >
                         {{sk.name}}
                     </li>
                 </ul>
@@ -59,6 +59,8 @@
             </div>
         </div>
 
+     
+
         <div class="row mb-2">
             <div class="col-md-6" *ngIf="resObj.langEnglish || resObj.langHindi || resObj.langMarathi">
                 <h2><mat-icon>language</mat-icon>Languages</h2>
@@ -79,7 +81,15 @@
                 
             </div>
         </div>
-
+        
+        <div class="row" *ngIf="resObj.hobby">
+            <div class="col-md-6">
+                <h2><mat-icon>favorite</mat-icon>Interests</h2>
+                <ul>
+                    <li *ngFor="let hobby of resObj.hobby">{{hobby}}</li>
+                </ul>
+            </div>
+        </div>
     </mat-card-content>
 </mat-card>
 

@@ -91,8 +91,11 @@
                             <mat-label>Board/University Name</mat-label>
                             <input matInput placeholder="Enter Your School/University Name" [formControlName]="i"
                                 required>
+                                <!-- <button mat-mini-fab color="basic" type="button">
+                                    <mat-icon (click)="addEduction()" class="addIcon">add_circle_outline</mat-icon>
+                                    </button> -->
                             <mat-icon matSuffix *ngIf="boardFormsArray.length > 1" (click)="onRemoveEdu(i)"
-                                class="addIcon">remove_circle</mat-icon>
+                                class="addIcon">remove_circle_outline</mat-icon>
                             <mat-error>
                                 this field is mandatory
                             </mat-error>
@@ -107,7 +110,9 @@
 
         <div class="row mb-3">
             <div class="col-12" align="end">
-                <mat-icon (click)="addEduction()" class="mr-2 addIcon">add_circle_outline</mat-icon>
+                <button mat-mini-fab color="basic" type="button" [disabled]="boardFormsArray.length > 3">
+                <mat-icon (click)="addEduction()" class="addIcon">add_circle_outline</mat-icon>
+                </button>
 
             </div>
         </div>
@@ -209,7 +214,7 @@
         </div>
 
         <div class="row" formArrayName="hobby" *ngFor="let hobby of hobbyFormsArray.controls, index as i">
-            <div class="col-md-9">
+            <div class="col-md-10">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Add Hobby</mat-label>
                     <input matInput placeholder="Enter Your hobby's here" 
@@ -222,8 +227,18 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-3 d-flex align-items-center justify-content-center mb-3">
-                <mat-icon class="addIcon" (click)="addHobby()">add_circle_outline</mat-icon>
+            <div class="col-md-2 d-flex align-items-center justify-content-center mb-3" *ngIf="hobbyFormsArray.length > 1">
+                <button mat-button mat-mini-fab color="basic" type="button" (click)="onRemoveHobby(i)">
+                    <mat-icon class="addIcon" >remove_circle_outline</mat-icon>
+                </button>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-2 d-flex align-items-center justify-content-center ml-auto mb-3">
+                <button mat-mini-fab color="basic" type="button" [disabled]="hobbyFormsArray.length >= 3">
+                    <mat-icon class="addIcon" (click)="addHobby()" >add_circle_outline</mat-icon>
+                </button>
             </div>
         </div>
 
@@ -252,7 +267,6 @@
         </div>
         <div>
             <button mat-button type="button" mat-dialog-close>Cancel</button>
-            
     <button mat-button mat-raised-button color="primary" type="submit" *ngIf="!resObj"
         [disabled]="!skills.length || resumeForm.invalid" [mat-dialog-close]="true">
         Create

@@ -72,6 +72,12 @@ export class ResumeFormComponent implements OnInit {
         this.resumeForm.removeControl('designation')
       }
 
+      // if (this.resObj.hobby) {
+        for (let i = 1; i < this.resObj.hobby!.length; i++) {
+          this.hobbyFormsArray.push(new FormControl(this.resObj.hobby![i]))
+  
+        // }
+      }
     }
 
     this.f['employment'].valueChanges
@@ -221,12 +227,11 @@ export class ResumeFormComponent implements OnInit {
       this.hobbyFormsArray.push(new FormControl(null, [Validators.required]))
     }
   }
-
-  onRemoveHobby(id: number) {
+  onRemoveHobby(id: number){
     this.hobbyFormsArray.removeAt(id)
   }
 
-
+ 
   onDelete(){
     this._dialog.open(DeleteConfirmationComponent).afterClosed()
         .subscribe(res => {
