@@ -1,5 +1,11 @@
-<ul class="list-group">
+<!-- <ul class="list-group">
     <li class="list-group-item" *ngFor="let res of resumesArray" [routerLink]="[res.id]" routerLinkActive="active">
         {{res.fullName}}
     </li>
-</ul>
+</ul> -->
+
+<mat-selection-list  [multiple]="false">
+    <mat-list-option *ngFor="let res of resumesArray"  routerLinkActive="active" [routerLink]="[res.id]"  class="list-group-item">
+      {{res.fullName}}
+    </mat-list-option>
+  </mat-selection-list>

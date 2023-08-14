@@ -8,10 +8,16 @@ import { MaterialModule } from './shared/material/material.module';
 import { ResumeModule } from './shared/resume/resume.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { SidenavComponent } from './shared/components/sidenav/sidenav.component';
+import { MainDashboardComponent } from './shared/components/main-dashboard/main-dashboard.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    SidenavComponent,
+    MainDashboardComponent
   ],
   imports: [
     BrowserModule,
