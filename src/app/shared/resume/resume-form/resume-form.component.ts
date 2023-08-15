@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Iresume, skill } from '../../model/resume-form';
@@ -10,13 +10,14 @@ import { ResumeComponent } from '../resume/resume.component';
 import { SnackbarService } from '../../services/snackbar.service';
 import { DeleteConfirmationComponent } from '../../material/delete-confirmation/delete-confirmation.component';
 import { CustomRegex } from '../../const/validators_regexp';
+import { IntercepterService } from '../../services/intercepter.service';
 
 @Component({
   selector: 'app-resume-form',
   templateUrl: './resume-form.component.html',
   styleUrls: ['./resume-form.component.scss']
 })
-export class ResumeFormComponent implements OnInit {
+export class ResumeFormComponent implements OnInit, OnDestroy {
 
 
   resumeForm!: FormGroup
@@ -30,7 +31,8 @@ export class ResumeFormComponent implements OnInit {
     private _dialogRef: MatDialogRef<ResumeComponent>,
     @Inject(MAT_DIALOG_DATA) public resObj: Iresume,
     private _snackbarService: SnackbarService,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _intercepterService: IntercepterService
   ) { }
 
   ngOnInit(): void {
@@ -72,12 +74,14 @@ export class ResumeFormComponent implements OnInit {
         this.resumeForm.removeControl('designation')
       }
 
-      // if (this.resObj.hobby) {
+      if (this.resObj.hobby) {
         for (let i = 1; i < this.resObj.hobby!.length; i++) {
           this.hobbyFormsArray.push(new FormControl(this.resObj.hobby![i]))
   
-        // }
+        }
       }
+
+
     }
 
     this.f['employment'].valueChanges
@@ -105,8 +109,10 @@ export class ResumeFormComponent implements OnInit {
   createResumeForm(): FormGroup {
     return this.resumeForm = this._fb.group({
       fullName: [null, Validators.required],
-      email: [null, [Validators.required, Validators.pattern(CustomRegex.email)]], 
-      phone: [null, [Validators.required, Validators.pattern(CustomRegex.phone)]],
+      // email: [null, [Validators.required, Validators.pattern(CustomRegex.email)]], 
+      // phone: [null, [Validators.required, Validators.pattern(CustomRegex.phone)]],
+       email: [null, [Validators.required]], 
+      phone: [null, [Validators.required]],
       address: [null, Validators.required],
       education: this._fb.array([null]),
       board: this._fb.array([null]),
@@ -141,7 +147,7 @@ export class ResumeFormComponent implements OnInit {
     const index = this.skills.indexOf(sk);
 
     if (index >= 0) {
-      (this.resumeForm.controls['skillsArray'].value as Array<skill>).splice(index, 1)
+      this.SkillsFormsArray.removeAt(index)
       this.skills.splice(index, 1);
       // console.log(this.skills, 'localArray');
       // console.log(this.SkillsFormsArray.value, 'formarry');
@@ -163,7 +169,7 @@ export class ResumeFormComponent implements OnInit {
           // console.log(res.name, 'key here');
           this._snackbarService.openSnackBar(`${this.resumeForm.controls['fullName'].value}'s resume Created Successfully`)
           this._dialogRef.close()
-          this._router.navigate([res.name])
+          this._router.navigate(['resume',res.name])
 
         })
 
@@ -242,10 +248,14 @@ export class ResumeFormComponent implements OnInit {
               .subscribe(res => {
                 // console.log(res);
                 this._snackbarService.openSnackBar('Delete Successfully.....!!!')
-                this._router.navigate([''])
+                this._router.navigate(['resume'])
               })
           }
         })
+  }
+
+  ngOnDestroy(): void {
+    this._intercepterService.unSubscribeAll()
   }
 }
 

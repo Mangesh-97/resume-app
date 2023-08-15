@@ -1,16 +1,40 @@
 <button  (click)="openFormDialog()" mat-button mat-raised-button color="accent" class="btnc">Create Resume</button>
 
-<!-- <div class="row mt-5">
-    <div class="col-md-3">
-        <app-resumes [resumesArray]="resumesArray"></app-resumes>
+<div class="row">
+    <div class="col-md-12">
+        <!-- <app-resumes [resumesArray]="resumesArray"></app-resumes> -->
+
+        
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false" *ngFor="let res of resumesArray"  routerLinkActive="active" [routerLink]="[res.id]" >
+      <mat-expansion-panel-header >
+        <mat-panel-title>
+          {{res.fullName}}
+        </mat-panel-title>
+        <!-- <mat-panel-description>
+          Currently I am {{panelOpenState ? 'open' : 'closed'}}
+        </mat-panel-description> -->
+      </mat-expansion-panel-header>
+
+
+      <router-outlet></router-outlet>
+
+    </mat-expansion-panel>
+    
+  </mat-accordion>
+
+
     </div>
-    <div class="col-md-9">
+    <!-- <div class="col-md-9">
+        <router-outlet></router-outlet>
+    </div> -->
+</div>
+
+<!-- <div class="row mt-5">
+    <div class="col-md-12">
         <router-outlet></router-outlet>
     </div>
 </div> -->
 
-<div class="row mt-5">
-    <div class="col-md-12">
-        <router-outlet></router-outlet>
-    </div>
-</div>
+

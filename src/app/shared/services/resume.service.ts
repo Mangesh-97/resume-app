@@ -46,7 +46,7 @@ export class ResumeService {
             }
 
             // console.log(obj);
-            arr.push(obj)
+            arr.unshift(obj)
           }
 
           return arr

@@ -16,12 +16,18 @@
         <mat-drawer mode="side" #sidenav >
 
             <mat-nav-list>
-                <a routerLink="/" mat-list-item (click)="sidenav.toggle()" >
+                <a routerLink="/main" mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac"  [routerLinkActiveOptions]="{exact: true}">
                     <mat-icon>
                         house
                     </mat-icon>
                     <span class="ml-2">
                         Home
+                    </span>
+                </a>
+                <a routerLink="/resume" mat-list-item (click)="sidenav.toggle()" routerLinkActive="ac">
+                    <mat-icon>assignment</mat-icon>
+                    <span class="ml-2">
+                        Resume
                     </span>
                 </a>
                 <a  mat-list-item (click)="sidenav.toggle()" >
@@ -46,15 +52,22 @@
             </mat-nav-list>
         </mat-drawer>
         <mat-drawer-content (click)="sidenav.close()">
-            <div class="container">
+            <div class="container mt-5">
                 <div class="row">
                     <div class="col-12">
                         <ng-content></ng-content>
-<app-main-dashboard></app-main-dashboard>
 
+            <div class="loader" *ngIf="isLoading">
+                <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+                </div>
+            </div>
                     </div>
                 </div>
             </div>
         </mat-drawer-content>
+
+       
+
       </mat-drawer-container>
-  
+   

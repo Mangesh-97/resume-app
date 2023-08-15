@@ -8,7 +8,7 @@
     </mat-card-header>
     <mat-card-content class="mx-5">
         <div class="row mb-3">
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-6">
                 <address class="mb-0">
 
                     <p><mat-icon>location_on</mat-icon>{{resObj.address}}</p>
@@ -20,7 +20,7 @@
                     <mat-icon>alternate_email</mat-icon> {{resObj.email}}
                 </p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-6">
                 <h2><mat-icon>offline_bolt</mat-icon>Objective</h2>
                 <p class="ml-4">
                     {{resObj.objective}}
@@ -29,7 +29,7 @@
         </div>
 
         <div class="row mb-2">
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-6">
                 <h2><mat-icon>star</mat-icon>Skills</h2>
 
                 <ul>
@@ -38,7 +38,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-6">
                 <h2><mat-icon>school</mat-icon>Education</h2>
 
                 <div class="education d-flex">
@@ -62,7 +62,7 @@
      
 
         <div class="row mb-2">
-            <div class="col-md-6" *ngIf="resObj.langEnglish || resObj.langHindi || resObj.langMarathi">
+            <div class="col-md-6 col-sm-6" *ngIf="resObj.langEnglish || resObj.langHindi || resObj.langMarathi">
                 <h2><mat-icon>language</mat-icon>Languages</h2>
                 <ul>
                     <li *ngIf="resObj.langEnglish">English</li>
@@ -72,7 +72,7 @@
 
                
             </div>
-            <div class="col-md-6" *ngIf="resObj.employment.includes('Experinced')">
+            <div class="col-md-6 col-sm-6" *ngIf="resObj.employment.includes('Experinced')">
                 <h2><mat-icon>work</mat-icon>Experince</h2>
                 <h3 class="ml-4 mb-0">{{resObj.companyName}}</h3>
                 
@@ -83,7 +83,7 @@
         </div>
         
         <div class="row" *ngIf="resObj.hobby">
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-6">
                 <h2><mat-icon>favorite</mat-icon>Interests</h2>
                 <ul>
                     <li *ngFor="let hobby of resObj.hobby">{{hobby}}</li>

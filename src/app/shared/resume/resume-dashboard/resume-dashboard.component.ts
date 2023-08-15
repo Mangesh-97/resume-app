@@ -1,21 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ResumeFormComponent } from '../resume-form/resume-form.component';
 import { ResumeService } from '../../services/resume.service';
 import { map, tap } from 'rxjs';
 import { Iresume } from '../../model/resume-form';
+import { IntercepterService } from '../../services/intercepter.service';
 
 @Component({
   selector: 'app-resume-dashboard',
   templateUrl: './resume-dashboard.component.html',
   styleUrls: ['./resume-dashboard.component.scss']
 })
-export class ResumeDashboardComponent implements OnInit {
+export class ResumeDashboardComponent implements OnInit, OnDestroy {
 
   resumesArray: Array<Iresume> = []
+  panelOpenState = false;
+
   constructor(
     public dialog: MatDialog,
-    private _resumeSerivce: ResumeService
+    private _resumeSerivce: ResumeService,
+    private _intercepterService: IntercepterService
   ) { }
 
   ngOnInit(): void {
@@ -61,5 +65,10 @@ export class ResumeDashboardComponent implements OnInit {
           }, 500);
         }
       })
+  }
+
+  
+  ngOnDestroy(): void {
+    this._intercepterService.unSubscribeAll()
   }
 }

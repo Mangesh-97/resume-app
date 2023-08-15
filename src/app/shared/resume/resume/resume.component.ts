@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ResumeService } from '../../services/resume.service';
 import { Iresume } from '../../model/resume-form';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ResumeFormComponent } from '../resume-form/resume-form.component';
 import { map, tap } from 'rxjs';
+import { IntercepterService } from '../../services/intercepter.service';
 
 @Component({
   selector: 'app-resume',
   templateUrl: './resume.component.html',
   styleUrls: ['./resume.component.scss']
 })
-export class ResumeComponent implements OnInit {
+export class ResumeComponent implements OnInit , OnDestroy{
   resumeId!: string
 
   resObj!: Iresume
@@ -19,7 +20,8 @@ export class ResumeComponent implements OnInit {
   constructor(
     private _route: ActivatedRoute,
     private _resumeService: ResumeService,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private __intercepterService: IntercepterService
   ) { }
 
   ngOnInit(): void {
@@ -65,5 +67,9 @@ export class ResumeComponent implements OnInit {
           }
         })
     }
+  }
+
+  ngOnDestroy(): void {
+    this.__intercepterService.unSubscribeAll()
   }
 }

@@ -63,12 +63,12 @@
         </div>
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 rwd-1">
                 <div class="row" formArrayName="education"
-                    *ngFor="let skill of EducationFormsArray.controls, index as i">
+                    *ngFor="let edu of EducationFormsArray.controls, index as i">
                     <div class="col-12">
                         <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Education</mat-label>
+                            <mat-label>{{i + 1}}.Education</mat-label>
                             <mat-select [formControlName]="i" required>
                                 <mat-option>None</mat-option>
                                 <mat-option value="10th">10th</mat-option>
@@ -76,6 +76,7 @@
                                 <mat-option value="Graduation">Graduation</mat-option>
                                 <mat-option value="Post-Graduation">Post-Graduation</mat-option>
                             </mat-select>
+                           
                             <mat-error>
                                 this field is mandatory
                             </mat-error>
@@ -83,9 +84,9 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-8">
-                <div class="row" formArrayName="board" *ngFor="let skill of boardFormsArray.controls, index as i">
+            
+            <div class="col-md-8 rwd-2">
+                <div class="row" formArrayName="board" *ngFor="let board of boardFormsArray.controls, index as i">
                     <div class="col-12">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Board/University Name</mat-label>
@@ -95,7 +96,7 @@
                                     <mat-icon (click)="addEduction()" class="addIcon">add_circle_outline</mat-icon>
                                     </button> -->
                             <mat-icon matSuffix *ngIf="boardFormsArray.length > 1" (click)="onRemoveEdu(i)"
-                                class="addIcon">remove_circle_outline</mat-icon>
+                                class="addIcon text-danger">remove_circle_outline</mat-icon>
                             <mat-error>
                                 this field is mandatory
                             </mat-error>
@@ -111,9 +112,11 @@
         <div class="row mb-3">
             <div class="col-12" align="end">
                 <button mat-mini-fab color="basic" type="button" [disabled]="boardFormsArray.length > 3">
-                <mat-icon (click)="addEduction()" class="addIcon">add_circle_outline</mat-icon>
+                <mat-icon (click)="addEduction()" class="addIcon text-success">add_circle_outline</mat-icon>
                 </button>
-
+                <mat-error *ngIf="EducationFormsArray.length >= 4">
+                    you can add upto 4
+                </mat-error>
             </div>
         </div>
 
@@ -214,31 +217,31 @@
         </div>
 
         <div class="row" formArrayName="hobby" *ngFor="let hobby of hobbyFormsArray.controls, index as i">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Add Hobby</mat-label>
-                    <input matInput placeholder="Enter Your hobby's here" 
+                    <mat-label>{{i + 1}}. Add Hobby</mat-label>
+                    <input matInput placeholder="Enter Your {{i + 1}} hobby here" 
                         cdkFocusInitial [formControlName]="i">
-                    <mat-icon matSuffix [ngClass]="{'text-danger': f['hobby'].invalid}">{{!f['hobby'].invalid ?
-                        'sentiment_very_satisfied' :
-                        'sentiment_very_dissatisfied'}}</mat-icon>
+                  
+                            <mat-icon class="addIcon text-danger" matSuffix (click)="onRemoveHobby(i)" *ngIf="hobbyFormsArray.length > 1">remove_circle_outline</mat-icon>
                     <mat-error>
                         this field is mandatory
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-2 d-flex align-items-center justify-content-center mb-3" *ngIf="hobbyFormsArray.length > 1">
-                <button mat-button mat-mini-fab color="basic" type="button" (click)="onRemoveHobby(i)">
-                    <mat-icon class="addIcon" >remove_circle_outline</mat-icon>
-                </button>
+            <div class="col-md-2 d-flex align-items-center justify-content-end mb-3" >
+                
             </div>
         </div>
         
-        <div class="row">
-            <div class="col-md-2 d-flex align-items-center justify-content-center ml-auto mb-3">
+        <div class="row mb-2">
+            <div class="col-md-12" align="end">
                 <button mat-mini-fab color="basic" type="button" [disabled]="hobbyFormsArray.length >= 3">
-                    <mat-icon class="addIcon" (click)="addHobby()" >add_circle_outline</mat-icon>
+                    <mat-icon class="addIcon text-success" (click)="addHobby()" >add_circle_outline</mat-icon>
                 </button>
+                <mat-error *ngIf="hobbyFormsArray.length >= 3">
+                    you can add upto 3
+                </mat-error>
             </div>
         </div>
 
@@ -261,7 +264,7 @@
  
     <mat-dialog-actions class="d-flex justify-content-between">
         <div>
-             <button mat-mini-fab color="warn" type="button"  (click)="onDelete()" [mat-dialog-close]="true" *ngIf="resObj">
+             <button mat-mini-fab color="warn" type="button"  (click)="onDelete()"  mat-dialog-close *ngIf="resObj">
                 <mat-icon>delete</mat-icon>
               </button>
         </div>
