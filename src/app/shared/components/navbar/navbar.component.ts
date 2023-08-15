@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,10 +8,16 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
-  @ViewChild('sidenav')
-  sidenav!: any
+  isLoading!: boolean
+  constructor(
+    private _loaderService: LoaderService
+  ) { }
+
   ngOnInit(): void {
+    this._loaderService.lodingStatus
+      .subscribe(res => {
+        this.isLoading = res
+      })
   }
 
   
