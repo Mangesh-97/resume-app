@@ -1,8 +1,22 @@
 <button  (click)="openFormDialog()" mat-button mat-raised-button color="accent" class="btnc">Create Resume</button>
-<!-- 
-<div class="row">
+
+<!-- <div class="row">
     <div class="col-md-3">
-        <app-resumes [resumesArray]="resumesArray"></app-resumes> -->
+        <app-resumes [resumesArray]="resumesArray"></app-resumes>
+    </div>
+    <div class="col-md-9">
+        <router-outlet></router-outlet>
+    </div>
+</div> -->
+
+
+<div class="row mt-5">
+    <div class="col-md-12">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+
 
 <!--         
   <mat-accordion>
@@ -23,18 +37,3 @@
     </mat-expansion-panel>
     
   </mat-accordion> -->
-
-
-    <!-- </div>
-    <div class="col-md-9">
-        <router-outlet></router-outlet>
-    </div>
-</div> -->
-
-<div class="row mt-5">
-    <div class="col-md-12">
-        <router-outlet></router-outlet>
-    </div>
-</div>
-
-

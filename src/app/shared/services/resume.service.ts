@@ -9,7 +9,7 @@ import { Iresume } from '../model/resume-form';
 })
 export class ResumeService {
 
-  deleteResume$= new BehaviorSubject<boolean>(false)
+  deleteResume$ = new BehaviorSubject<boolean>(false)
 
   constructor(
     private _http: HttpClient

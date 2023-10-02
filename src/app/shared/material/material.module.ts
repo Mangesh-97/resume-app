@@ -80,7 +80,7 @@ const mat = [
 
 @NgModule({
   declarations: [
-  
+
     DeleteConfirmationComponent
   ],
   imports: [

@@ -6,7 +6,7 @@ import { MainDashboardComponent } from './shared/components/main-dashboard/main-
 
 const routes: Routes = [
   {
-    path: 'main',
+    path: '',
     component: MainDashboardComponent
   },
   {

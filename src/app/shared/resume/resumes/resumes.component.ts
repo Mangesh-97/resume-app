@@ -16,7 +16,6 @@ export class ResumesComponent implements OnInit {
 
   ngOnInit(): void {
 
-
   }
 
 }

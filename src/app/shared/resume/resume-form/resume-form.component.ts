@@ -65,10 +65,10 @@ export class ResumeFormComponent implements OnInit, OnDestroy {
 
       }
       if (this.resObj.employment.includes('Experinced')) {
-        this.resumeForm.addControl('companyName',new FormControl(this.resObj.companyName, Validators.required))
-        this.resumeForm.addControl('experience',new FormControl(this.resObj.experience, Validators.required))
-        this.resumeForm.addControl('designation',new FormControl(this.resObj.designation, Validators.required))
-      }else{
+        this.resumeForm.addControl('companyName', new FormControl(this.resObj.companyName, Validators.required))
+        this.resumeForm.addControl('experience', new FormControl(this.resObj.experience, Validators.required))
+        this.resumeForm.addControl('designation', new FormControl(this.resObj.designation, Validators.required))
+      } else {
         this.resumeForm.removeControl('companyName')
         this.resumeForm.removeControl('experience')
         this.resumeForm.removeControl('designation')
@@ -77,7 +77,7 @@ export class ResumeFormComponent implements OnInit, OnDestroy {
       if (this.resObj.hobby) {
         for (let i = 1; i < this.resObj.hobby!.length; i++) {
           this.hobbyFormsArray.push(new FormControl(this.resObj.hobby![i]))
-  
+
         }
       }
 
@@ -85,23 +85,23 @@ export class ResumeFormComponent implements OnInit, OnDestroy {
     }
 
     this.f['employment'].valueChanges
-    .subscribe(res => {
-      // console.log(res);
-      if (res.includes('Experinced')) {
-        
-        this.resumeForm.addControl('companyName',new FormControl(null, Validators.required))
-        this.resumeForm.addControl('experience',new FormControl(null, Validators.required))
-        this.resumeForm.addControl('designation',new FormControl(null, Validators.required))
-      }else{
-        this.resumeForm.removeControl('companyName')
-        this.resumeForm.removeControl('experience')
-        this.resumeForm.removeControl('designation')
+      .subscribe(res => {
+        // console.log(res);
+        if (res.includes('Experinced')) {
+
+          this.resumeForm.addControl('companyName', new FormControl(null, Validators.required))
+          this.resumeForm.addControl('experience', new FormControl(null, Validators.required))
+          this.resumeForm.addControl('designation', new FormControl(null, Validators.required))
+        } else {
+          this.resumeForm.removeControl('companyName')
+          this.resumeForm.removeControl('experience')
+          this.resumeForm.removeControl('designation')
 
 
-      }
-      // console.log(this.resumeForm.value);
-      
-    })
+        }
+        // console.log(this.resumeForm.value);
+
+      })
 
 
   }
@@ -111,12 +111,12 @@ export class ResumeFormComponent implements OnInit, OnDestroy {
       fullName: [null, Validators.required],
       // email: [null, [Validators.required, Validators.pattern(CustomRegex.email)]], 
       // phone: [null, [Validators.required, Validators.pattern(CustomRegex.phone)]],
-       email: [null, [Validators.required]], 
+      email: [null, [Validators.required]],
       phone: [null, [Validators.required]],
       address: [null, Validators.required],
       education: this._fb.array([null]),
       board: this._fb.array([null]),
-      employment:[null, Validators.required], //
+      employment: [null, Validators.required], //
       skillsArray: this._fb.array([]),
       langEnglish: [null],
       langHindi: [null],
@@ -169,7 +169,7 @@ export class ResumeFormComponent implements OnInit, OnDestroy {
           // console.log(res.name, 'key here');
           this._snackbarService.openSnackBar(`${this.resumeForm.controls['fullName'].value}'s resume Created Successfully`)
           this._dialogRef.close()
-          this._router.navigate(['resume',res.name])
+          this._router.navigate(['resume', res.name])
 
         })
 
@@ -189,6 +189,7 @@ export class ResumeFormComponent implements OnInit, OnDestroy {
           this._snackbarService.openSnackBar(`${this.resumeForm.controls['fullName'].value}'s resume Updated Successfully`)
 
         })
+
 
     }
 
@@ -210,7 +211,7 @@ export class ResumeFormComponent implements OnInit, OnDestroy {
     return this.resumeForm.get('skillsArray') as FormArray
 
   }
-  
+
   get hobbyFormsArray() {
     return this.resumeForm.get('hobby') as FormArray
 
@@ -233,25 +234,25 @@ export class ResumeFormComponent implements OnInit, OnDestroy {
       this.hobbyFormsArray.push(new FormControl(null, [Validators.required]))
     }
   }
-  onRemoveHobby(id: number){
+  onRemoveHobby(id: number) {
     this.hobbyFormsArray.removeAt(id)
   }
 
- 
-  onDelete(){
+
+  onDelete() {
     this._dialog.open(DeleteConfirmationComponent).afterClosed()
-        .subscribe(res => {
-          // console.log('delete', res, this.resObj.id);
-          if (res) {
-            this._resumeService.deleteResume$.next(res)
-            this._resumeService.deleteResume(this.resObj.id!) 
-              .subscribe(res => {
-                // console.log(res);
-                this._snackbarService.openSnackBar('Delete Successfully.....!!!')
-                this._router.navigate(['resume'])
-              })
-          }
-        })
+      .subscribe(res => {
+        // console.log('delete', res, this.resObj.id);
+        if (res) {
+          this._resumeService.deleteResume$.next(res)
+          this._resumeService.deleteResume(this.resObj.id!)
+            .subscribe(res => {
+              // console.log(res);
+              this._snackbarService.openSnackBar('Delete Successfully.....!!!')
+              this._router.navigate(['resume'])
+            })
+        }
+      })
   }
 
   ngOnDestroy(): void {
