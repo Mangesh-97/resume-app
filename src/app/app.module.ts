@@ -39,3 +39,8 @@ import { IntercepterService } from './shared/services/intercepter.service';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+
+// npm i jspdf
+// npm i html2canvas
