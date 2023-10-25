@@ -12,6 +12,9 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { SidenavComponent } from './shared/components/sidenav/sidenav.component';
 import { MainDashboardComponent } from './shared/components/main-dashboard/main-dashboard.component';
 import { IntercepterService } from './shared/services/intercepter.service';
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import { IntercepterService } from './shared/services/intercepter.service';
     ResumeModule,
     MaterialModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAnalyticsModule
   ],
   providers: [
     {
